@@ -1,0 +1,2 @@
+
+npm i webpack-dev-server@^1.16.2 webpack@1.13.2 --save-dev
