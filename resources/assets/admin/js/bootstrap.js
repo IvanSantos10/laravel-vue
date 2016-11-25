@@ -1,4 +1,4 @@
-alert('ok!');
+
 window._ = require('lodash');
 
 /**
