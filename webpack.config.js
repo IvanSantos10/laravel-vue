@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-         admim: './resources/assets/admin/js/admin.js'
+         admin: './resources/assets/admin/js/admin.js'
     },
     output: {
         path: __dirname + '/public/build',
