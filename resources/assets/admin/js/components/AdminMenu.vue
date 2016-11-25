@@ -4,21 +4,34 @@
             <a :href="item.url">{{ item.name }}</a>
         </li>
     </ul>
+    <ul id="bropdown-logout" class="dropdown-content">
+        <a :href="config.urlLogout" @click.prevent="goToLogout()">Sair</a>
+        <form id="logout-form" :action="config.urlLogout" method="POST" style="display: none;">
+            <input type="hidden" name="_token" :value="config.csrfToken"/>
+        </form>
+    </ul>
     <div class="navbar-fixed">
         <nav class="teal">
-            <div class="nav-wrapper container ">
-                <a href="#" class="right brand-logo">PR Contas</a>
-                <a href="#" data-activates="nav-mobile" class="button-collapse">
-                    <i class="material-icons">menu</i>
-                </a>
-                <ul class="left hide-on-med-and-down">
-                    <li v-for="o in config.menus">
-                        <a v-if="o.bropdownId" class="dropdown-button" href="!#" :data-activates="o.bropdownId" >
-                            {{ o.name }} <i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                        <a v-else :href="o.url">{{ o.name }}</a>
-                    </li>
-                </ul>
+            <div class="nav-wrapper">
+                <div class="col s12">
+                    <a href="#" class="left brand-logo">ADM-Financeiro</a>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li v-for="o in config.menus">
+                            <a v-if="o.bropdownId" class="dropdown-button" href="!#" :data-activates="o.bropdownId">
+                                {{ o.name }} <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                            <a v-else :href="o.url">{{ o.name }}</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-button" href="!#" data-activates="bropdown-logout">
+                                {{ config.name }} <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <ul id="nav-mobile" class="side-nav">
                     <li v-for="o in config.menus">
                         <a :href="o.url">{{ o.name }}</a>
@@ -29,24 +42,29 @@
     </div>
 </template>
 
-<script type='text/javascript' >
+<script type='text/javascript'>
     export default {
         props: {
-          config: {
-              type: Object,
-              default(){
-                  return {
-                      name: '',
-                      menus: [],
-                      menusDropdown: [],
-                      urlLogout: '/admin/logout'
-                  }
-              }
-          }
+            config: {
+                type: Object,
+                default(){
+                    return {
+                        name: '',
+                        menus: [],
+                        menusDropdown: [],
+                        urlLogout: '/admin/logout'
+                    }
+                }
+            }
         },
         ready() {
             $('.button-collapse').sideNav();
             $('.dropdown-button').dropdown();
+        },
+        methods: {
+            goToLogout(){
+                $('#logout-form').submit();
+            }
         }
     };
 </script>
