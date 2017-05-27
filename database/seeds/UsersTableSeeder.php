@@ -15,13 +15,13 @@ class UsersTableSeeder extends Seeder
             ->states('admin')
             ->create([
                     'name' => 'Admin',
-                    'email' => 'admin@santos.com'
+                    'email' => 'admin@financeiro.com'
                 ]
             );
         factory(financeiro\User::class, 1)
             ->create([
                     'name' => 'Ivan santos',
-                    'email' => 'ivan@santos.com'
+                    'email' => 'ivan@financeiro.com'
                 ]
             );
     }
