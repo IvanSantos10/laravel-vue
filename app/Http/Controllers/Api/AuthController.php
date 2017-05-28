@@ -18,13 +18,16 @@ class AuthController extends Controller
 
         $credentials = $this->credentials($request);
 
-        if ($token = Auth::guard('api')->attempt($credentials)) {
+        if ($token = \Auth::guard('api')->attempt($credentials)) {
             return $this->sendLoginResponse($request, $token);
         }
     }
 
     protected function sendLoginResponse(Request $request, $token)
     {
+        return response()->json([
+            'token' => $token
+        ]);
     }
 
 
