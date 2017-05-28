@@ -2,6 +2,7 @@
 
 namespace financeiro\Http\Controllers\Api;
 
+use Auth;
 use financeiro\Http\Controllers\Controller;
 use financeiro\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -75,13 +76,9 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $this->guard()->logout();
+        Auth::guard()->logout();
 
-        $request->session()->flush();
-
-        $request->session()->regenerate();
-
-        return redirect(env('URL_ADMIN_LOGIN'));
+        return response()->json([],204);
     }
 
 }
