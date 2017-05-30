@@ -47,6 +47,12 @@ class AuthController extends Controller
         ]);
     }
 
+    public function refreshToken(Request $request)
+    {
+        $token = Auth::guard('api')->refresh();
+        return $this->sendLoginResponse($request, $token);
+    }
+
     protected function sendLockoutResponse(Request $request)
     {
         $seconds = $this->limiter()->availableIn(
@@ -57,14 +63,14 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => $message
-        ],403);
+        ], 403);
     }
 
     protected function sendFailedLoginResponse(Request $request)
     {
         return response()->json([
             'message' => Lang::get('auth.failed')
-        ],401);
+        ], 401);
     }
 
 
@@ -78,7 +84,7 @@ class AuthController extends Controller
     {
         Auth::guard()->logout();
 
-        return response()->json([],204);
+        return response()->json([], 204);
     }
 
 }
