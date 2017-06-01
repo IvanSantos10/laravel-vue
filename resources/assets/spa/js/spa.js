@@ -14,6 +14,13 @@ window.Vue = require('vue');
  * allows your team to easily build robust real-time web applications.
  */
 
+Vue.component('app', require('./components/App.vue'));
+
+const app = new Vue({
+    el: 'body'
+});
+
+
 // import Echo from "laravel-echo"
 
 // window.Echo = new Echo({
