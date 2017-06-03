@@ -11,11 +11,10 @@ return [
      |
      */
     'supportsCredentials' => false,
-    'allowedOrigins' => ['*'],
+    'allowedOrigins' => ['http://10.0.0.112:3000', 'http://localhost:3000', 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],
     'exposedHeaders' => [],
     'maxAge' => 0,
-    'hosts' => [],
 ];
 
