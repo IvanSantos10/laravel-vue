@@ -11,10 +11,11 @@ return [
      |
      */
     'supportsCredentials' => false,
-    'allowedOrigins' => ['http://0.0.0.0:3000'],
+    'allowedOrigins' => ['*'],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],
     'exposedHeaders' => [],
     'maxAge' => 0,
+    'hosts' => [],
 ];
 
