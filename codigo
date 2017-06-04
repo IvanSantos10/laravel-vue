@@ -3,3 +3,9 @@ npm i webpack-dev-server@^1.16.2 webpack@1.13.2 --save-dev
 
 npm i webpack-merge@0.14.1 --save-dev
 
+npm install gulp-env@^0.4.0 -save-dev
+
+npm install stringify-object@^3.0.0-save-dev
+
+npm install gulp-file@^0.3.0 -save-dev
+
