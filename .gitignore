@@ -9,4 +9,5 @@ Homestead.yaml
 .env
 .phpstorm.meta.php
 _ide_helper.php
-_ide_helper.php
+resource/assets/spa/js/config.js
+
