@@ -32,5 +32,9 @@ export default {
     },
     user(){
         return LocalStorege.getObject(USER);
+    },
+    check(){
+        return LocalStorege.get(TOKEN) ? true :false;
     }
+
 }
