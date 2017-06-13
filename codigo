@@ -9,3 +9,7 @@ npm install stringify-object@^3.0.0-save-dev
 
 npm install gulp-file@^0.3.0 -save-dev
 
+
+
+
+Serviço para administração do JWT Token
