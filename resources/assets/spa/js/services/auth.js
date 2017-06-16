@@ -1,8 +1,7 @@
-import {Jwt} from './resources';
+import JwtToken from './jwt-token';
 import LocalStorege from './localStorege';
 import {User} from '../services/resources';
 
-const TOKEN = 'token';
 const USER = 'user';
 
 const afterLogin = (response) => {
@@ -11,8 +10,7 @@ const afterLogin = (response) => {
 
 export default {
     login(email, password){
-        return Jwt.accessToken(email, password).then((response) => {
-            LocalStorege.set(TOKEN, response.data.token);
+        return JwtToken.accessToken(email, password).then((response) => {
             afterLogin(response);
             return response
         });
@@ -22,27 +20,17 @@ export default {
             this.clearAuth();
         };
 
-        return Jwt.logout()
+        return JwtToken.revokeToken()
             .then(afterLogout())
             .catch(afterLogout());
-    },
-    refreshToken(){
-        return Jwt.refreshToken().then((response) => {
-            LocalStorege.set(TOKEN, response.data.token);
-            return response;
-        });
-    },
-    getAuthorizationHeader(){
-        return `Bearer ${LocalStorege.get(TOKEN)}`;
     },
     user(){
         return LocalStorege.getObject(USER);
     },
     check(){
-        return LocalStorege.get(TOKEN) ? true :false;
+        return JwtToken.token ? true :false;
     },
     clearAuth(){
-        LocalStorege.remove(TOKEN);
         LocalStorege.remove(USER);
     }
 

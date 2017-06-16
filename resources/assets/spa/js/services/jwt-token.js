@@ -1,19 +1,37 @@
+import {Jwt} from './resources';
+import LocalStorege from './localStorege';
+
+const TOKEN = 'token';
 export default {
-    set(key, value){
-        window.localStorage[key] = value;
-        return window.localStorage[key];
+    get token(){
+        return LocalStorege.get(TOKEN);
     },
-    get(key, defaultValue = null){
-        return window.localStorage[key] || defaultValue;
+    set token(value){
+        return value ? LocalStorege.set(TOKEN, value) : LocalStorege.remove(TOKEN);
     },
-    setObject(key, valeu){
-        window.localStorage[key] = JSON.stringify(valeu);
-        return this.getObject(key);
+    accessToken(email, password){
+        return Jwt.accessToken(email, password).then((response) => {
+            this.token = response.data.token;
+            return response;
+        });
     },
-    getObject(key){
-        return JSON.parse(window.localStorage[key] || null);
+    refreshToken(){
+        return Jwt.refreshToken().then((response) => {
+            this.token = response.data.token;
+            return response;
+        });
     },
-    remove(key){
-        window.localStorage.removeItem(key);
-    }
+    revokeToken(){
+        let afterRevokeToken = () => {
+            this.token = null;
+        };
+
+        return Jwt.logout()
+            .then(afterRevokeToken())
+            .catch(afterRevokeToken());
+    },
+    getAuthorizationHeader(){
+        return `Bearer ${LocalStorege.get(TOKEN)}`;
+    },
+
 }
