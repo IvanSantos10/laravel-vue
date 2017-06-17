@@ -1,16 +1,14 @@
 <?php
 
-namespace financeiro\Http\Controllers;
+namespace financeiro\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-
-use financeiro\Http\Requests;
+use financeiro\Http\Controllers\Controller;
+use financeiro\Http\Controllers\Response;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use financeiro\Http\Requests\BankCreateRequest;
 use financeiro\Http\Requests\BankUpdateRequest;
 use financeiro\Repositories\BankRepository;
-use financeiro\Validators\BankValidator;
 
 
 class BanksController extends Controller
@@ -21,15 +19,10 @@ class BanksController extends Controller
      */
     protected $repository;
 
-    /**
-     * @var BankValidator
-     */
-    protected $validator;
 
-    public function __construct(BankRepository $repository, BankValidator $validator)
+    public function __construct(BankRepository $repository)
     {
         $this->repository = $repository;
-        $this->validator  = $validator;
     }
 
 
@@ -51,6 +44,11 @@ class BanksController extends Controller
         }
 
         return view('banks.index', compact('banks'));
+    }
+
+    public function create()
+    {
+
     }
 
     /**
@@ -90,28 +88,6 @@ class BanksController extends Controller
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $bank = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $bank,
-            ]);
-        }
-
-        return view('banks.show', compact('bank'));
     }
 
 
