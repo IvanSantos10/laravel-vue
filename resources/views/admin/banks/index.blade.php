@@ -24,7 +24,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {!! $banks->links() !!}
         </div>
-        {!! $banks->links() !!}
     </div>
 @endsection
