@@ -2,7 +2,6 @@
 
 namespace financeiro\Providers;
 
-use financeiro\Jwt\Manager;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

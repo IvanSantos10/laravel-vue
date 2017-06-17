@@ -2,7 +2,7 @@
 
 namespace financeiro\Http\Controllers\Auth;
 
-use financeiro\User;
+use financeiro\Models\User;
 use Validator;
 use financeiro\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;

@@ -3,7 +3,7 @@
 namespace financeiro\Http\Controllers\Auth;
 
 use financeiro\Http\Controllers\Controller;
-use financeiro\User;
+use financeiro\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 

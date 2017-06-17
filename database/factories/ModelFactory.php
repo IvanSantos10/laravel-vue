@@ -11,6 +11,7 @@
 |
 */
 
+use financeiro\Models\Bank;
 use financeiro\Models\User;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
@@ -30,3 +31,11 @@ $factory->state(User::class, 'admin', function (Faker\Generator $faker){
         'role' => User::ROLE_ADMIN
     ];
 });
+
+$factory->define(Bank::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'logo' => md5(time()). '.jpeg',
+    ];
+});
+

@@ -2,7 +2,7 @@
 
 namespace financeiro\Providers;
 
-use financeiro\User;
+use financeiro\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
