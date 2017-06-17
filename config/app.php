@@ -168,7 +168,7 @@ return [
          */
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
-
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -178,6 +178,7 @@ return [
         // financeiro\Providers\BroadcastServiceProvider::class,
         financeiro\Providers\EventServiceProvider::class,
         financeiro\Providers\RouteServiceProvider::class,
+        financeiro\Providers\RepositoryServiceProvider::class,
 
     ],
 

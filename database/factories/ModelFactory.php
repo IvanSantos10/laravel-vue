@@ -11,7 +11,7 @@
 |
 */
 
-use financeiro\User;
+use financeiro\Models\User;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
