@@ -9,7 +9,7 @@ Vue.http.interceptors.push((request, next) => {
 
 Vue.http.interceptors.push((request, next) => {
     next((response) => {
-        if (response.status === 401 || response.status === 0) { //   token expirado
+        if (response.status === 401) { //   token expirado
             return JwtToken.refreshToken()
                 .then(() => {
                     return Vue.http(request);

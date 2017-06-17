@@ -4,7 +4,7 @@ namespace financeiro\Http\Controllers\Api;
 
 use Auth;
 use financeiro\Http\Controllers\Controller;
-use financeiro\User;
+use financeiro\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Lang;
