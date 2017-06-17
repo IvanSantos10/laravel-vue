@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <h4>Lista de bancos</h4>
+            <a href="{{route('admin.banks.create')}}" class="btn waves-effect">Novo banco</a>
             <table class="bordered striped highlight responsive-table z-depth-5">
                 <thead>
                 <tr>
