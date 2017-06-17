@@ -13,3 +13,6 @@ npm install gulp-file@^0.3.0 -save-dev
 
 
 Serviço para administração do JWT Token
+
+
+php artisan vendor:publish --tag=laravel-pagination      publicar a paginacao
