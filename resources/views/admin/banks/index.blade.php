@@ -19,7 +19,10 @@
                         <td>{{ $bank->id }}</td>
                         <td>{{ $bank->name }}</td>
                         <td>
-                            Ações
+                            <a href="{{route('admin.banks.edit', ['bank' => $bank->id])}}">Editar</a>
+                            <a href="#" onclick="event.preventDefault(); document.getElementById({{"\"form-$bank->id\""}}).submit();">Excluir</a>
+                            {{ Form::open(['route' => ['admin.banks.destroy', 'bank' => $bank->id], 'id' => 'form-'.$bank->id, 'method' => 'DELETE']) }}
+                            {{ Form::close() }}
                         </td>
                     </tr>
                 @endforeach

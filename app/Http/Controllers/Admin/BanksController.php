@@ -4,8 +4,6 @@ namespace financeiro\Http\Controllers\Admin;
 
 use financeiro\Http\Controllers\Controller;
 use financeiro\Http\Controllers\Response;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
 use financeiro\Http\Requests\BankCreateRequest;
 use financeiro\Http\Requests\BankUpdateRequest;
 use financeiro\Repositories\BankRepository;
@@ -60,7 +58,7 @@ class BanksController extends Controller
     public function store(BankCreateRequest $request)
     {
         $data = $request->all();
-        $data['logo'] = md5(time()). '.jpeg';
+        $data['logo'] = md5(time()) . '.jpeg';
         $this->repository->create($data);
 
         /*
@@ -91,7 +89,7 @@ class BanksController extends Controller
 
         $bank = $this->repository->find($id);
 
-        return view('banks.edit', compact('bank'));
+        return view('admin.banks.edit', compact('bank'));
     }
 
 
@@ -99,42 +97,25 @@ class BanksController extends Controller
      * Update the specified resource in storage.
      *
      * @param  BankUpdateRequest $request
-     * @param  string            $id
+     * @param  string $id
      *
      * @return Response
      */
     public function update(BankUpdateRequest $request, $id)
     {
+        $this->repository->update($request->all(), $id);
 
-        try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            $bank = $this->repository->update($request->all(), $id);
-
+        /*
+        if ($request->wantsJson()) {
             $response = [
                 'message' => 'Bank updated.',
                 'data'    => $bank->toArray(),
             ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return response()->json($response);
         }
+        */
+
+        return redirect()->route('admin.banks.index');
     }
 
 
@@ -149,6 +130,7 @@ class BanksController extends Controller
     {
         $deleted = $this->repository->delete($id);
 
+        /*
         if (request()->wantsJson()) {
 
             return response()->json([
@@ -156,6 +138,7 @@ class BanksController extends Controller
                 'deleted' => $deleted,
             ]);
         }
+        */
 
         return redirect()->back()->with('message', 'Bank deleted.');
     }
