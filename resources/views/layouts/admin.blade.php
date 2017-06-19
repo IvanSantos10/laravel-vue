@@ -16,7 +16,7 @@
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
-                'csrfToken' => csrf_token(),
+            'csrfToken' => csrf_token(),
         ]); ?>
     </script>
 </head>
@@ -25,13 +25,34 @@
     <header>
         @if (Auth::check())
             <?php $menuConfig = [
-                    'name' => Auth::user()->name,
-                    'menus' => [
-                            ['name' => 'Banco', 'url' => route('admin.banks.index')]
+                'name' => Auth::user()->name,
+                'menus' => [
+                    [
+                        'name' => 'Banco',
+                        'url' => route('admin.banks.index'),
+                        'active' => isRouteActive('admin.banks.index ')
                     ],
-                    'menusDropdown' => [],
-                    'urlLogout' => env('URL_ADMIN_LOGOUT'),
-                    'csrfToken' => csrf_token()
+                    ['name' => 'Contas a pagar', 'dropdownId' => 'teste']
+                ],
+                'menusDropdown' => [
+                    [
+                        'id' => 'teste',
+                        'items' => [
+                            [
+                                'name' => 'Banco',
+                                'url' => route('admin.banks.index'),
+                                'active' => isRouteActive('admin.banks.index ')
+                            ],
+                            [
+                                'name' => 'Banco edit',
+                                'url' => route('admin.banks.index'),
+                                'active' => isRouteActive('admin.banks.edit ')
+                            ],
+                        ]
+                    ]
+                ],
+                'urlLogout' => env('URL_ADMIN_LOGOUT'),
+                'csrfToken' => csrf_token()
             ];
             ?>
             <admin-menu :config="{{ json_encode($menuConfig) }}"></admin-menu>

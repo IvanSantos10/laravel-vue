@@ -19,7 +19,7 @@
                     </a>
                     <ul class="right hide-on-med-and-down">
                         <li v-for="o in menus">
-                            <a v-if="o.bropdownId" class="dropdown-button" href="!#" :data-activates="o.bropdownId">
+                            <a v-if="o.dropdownId" class="dropdown-button" href="!#" :data-activates="o.dropdownId">
                                 {{ o.name }} <i class="material-icons right">arrow_drop_down</i>
                             </a>
                             <a v-else v-link="{name: o.url}">{{ o.name }}</a>
@@ -47,8 +47,8 @@
         data() {
             return {
                 menus: [
-                    {name: 'Contas a pagar', bropdownId: 'teste'},
-                    {name: 'Contas a receber', bropdownId: 'auth.login'}
+                    {name: 'Contas a pagar', dropdownId: 'teste'},
+                    {name: 'Contas a receber', dropdownId: 'auth.login'}
                 ],
                 menusDropdown: [
                     {
