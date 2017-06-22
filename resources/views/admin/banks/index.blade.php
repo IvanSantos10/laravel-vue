@@ -19,11 +19,12 @@
                         <td>{{ $bank->id }}</td>
                         <td>{{ $bank->name }}</td>
                         <td>
-                            <a href="{{route('admin.banks.edit', ['bank' => $bank->id])}}">Editar</a>
-                            <a href="#" onclick="event.preventDefault(); document.getElementById({{"\"form-$bank->id\""}}).submit();gg">Excluir</a>
-                            {{ Form::open(['route' => ['admin.banks.destroy', 'bank' => $bank->id], 'id' => 'form-'.$bank->id, 'method' => 'DELETE']) }}
-                            {{ Form::close() }}
-                        </td>
+                            <a href="{{route('admin.banks.edit', ['bank' => $bank->id])}}">Editar</a> |
+                            <delete-action action="{{route('admin.banks.destroy', ['bank' => $bank->id])}}"
+                                           action-element="link-delete-{{$bank->id}}" csrf-token="{{csrf_token()}}">
+                                <a id="link-delete-{{$bank->id}}" href="{{route('admin.banks.destroy', ['bank' => $bank->id])}}">Excluir</a>
+                            </delete-action>
+                           </td>
                     </tr>
                 @endforeach
                 </tbody>
