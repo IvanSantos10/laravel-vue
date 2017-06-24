@@ -2,6 +2,9 @@
 
 namespace financeiro\Providers;
 
+use financeiro\Events\BankCreatedEvent;
+use financeiro\Listeners\BankActionListener;
+use financeiro\Listeners\BankLogoUpload;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -13,8 +16,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'financeiro\Events\SomeEvent' => [
-            'financeiro\Listeners\EventListener',
+        BankCreatedEvent::class => [
+            BankLogoUpload::class,
+            BankActionListener::class
         ],
     ];
 

@@ -2,10 +2,12 @@
 
 namespace financeiro\Http\Controllers\Admin;
 
+use financeiro\Events\BankCreatedEvent;
 use financeiro\Http\Controllers\Controller;
 use financeiro\Http\Controllers\Response;
 use financeiro\Http\Requests\BankCreateRequest;
 use financeiro\Http\Requests\BankUpdateRequest;
+use financeiro\Models\Bank;
 use financeiro\Repositories\BankRepository;
 
 
@@ -40,6 +42,9 @@ class BanksController extends Controller
             ]);
         }
         */
+        $bank = new Bank();
+        $bank->name = "Itau";
+        event(new BankCreatedEvent($bank));
         return view('admin.banks.index', compact('banks'));
     }
 

@@ -16,3 +16,6 @@ Serviço para administração do JWT Token
 
 
 php artisan vendor:publish --tag=laravel-pagination      publicar a paginacao
+
+php artisan make:event BankCreatedEvent    criacao de evento
+php artisan make:listener BankLogoUpload --event=BankCreatedEvent
