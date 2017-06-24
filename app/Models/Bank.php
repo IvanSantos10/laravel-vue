@@ -15,4 +15,9 @@ class Bank extends Model implements Transformable
         'logo'
     ];
 
+    public static function logoDir()
+    {
+        return 'banks/images';
+    }
+
 }
