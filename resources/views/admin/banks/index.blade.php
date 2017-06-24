@@ -22,7 +22,22 @@
                             <a href="{{route('admin.banks.edit', ['bank' => $bank->id])}}">Editar</a> |
                             <delete-action action="{{route('admin.banks.destroy', ['bank' => $bank->id])}}"
                                            action-element="link-delete-{{$bank->id}}" csrf-token="{{csrf_token()}}">
-                                <a id="link-delete-{{$bank->id}}" href="{{route('admin.banks.destroy', ['bank' => $bank->id])}}">Excluir</a>
+                                <?php $modalId = "modal-delete-$bank->id"; ?>
+                                <a id="link-modal-{{$bank->id}}" href="#{{$modalId}}">Excluir</a>
+                                <modal :modal="{{json_encode(['id' => $modalId])}}" style="display: none">
+                                    <div slot="content">
+                                        <h4>Mensagem de confimação</h4>
+                                        <p><strong>Deseja excluir este banco?</strong></p>
+                                        <div class="divider"></div>
+                                        <p>Nome: <strong>{{$bank->name}}</strong></p>
+                                        <div class="divider"></div>
+                                    </div>
+                                    <div slot="footer">
+                                        <button class="btn btn-flat waves-effect green lighten-2 modal-close modal-action"
+                                                id="link-delete-{{$bank->id}}">OK</button>
+                                        <button class="btn btn-flat waves-effect waves-red modal-close modal-action">Cancelar</button>
+                                    </div>
+                                </modal>
                             </delete-action>
                            </td>
                     </tr>
