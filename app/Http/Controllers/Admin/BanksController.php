@@ -42,9 +42,8 @@ class BanksController extends Controller
             ]);
         }
         */
-        $bank = new Bank();
-        $bank->name = "Itau";
-        event(new BankCreatedEvent($bank));
+
+        //event(new BankCreatedEvent($bank));
         return view('admin.banks.index', compact('banks'));
     }
 
@@ -63,7 +62,6 @@ class BanksController extends Controller
     public function store(BankCreateRequest $request)
     {
         $data = $request->all();
-        $data['logo'] = md5(time()) . '.jpeg';
         $this->repository->create($data);
 
         /*

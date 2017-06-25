@@ -5,8 +5,6 @@ namespace financeiro\Listeners;
 use financeiro\Events\BankStoredEvent;
 use financeiro\Models\Bank;
 use financeiro\Repositories\BankRepository;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class BankLogoUploadListener
 {
@@ -37,11 +35,15 @@ class BankLogoUploadListener
         $bank = $event->getBank();
         $logo = $event->getLogo();
 
-        $name = md5(time()). '.' . $logo->guessExtension();
-        $destFile = Bank::logoDir();
+        if($logo) {
+            $name = $bank->created_at != $bank->updated_at ? $bank->logo : md5(time()) . '.' . $logo->guessExtension();
+            $destFile = Bank::logoDir();
 
-        \Storage::disk('public')->putFileAs($destFile, $logo, $name);
+            \Storage::disk('public')->putFileAs($destFile, $logo, $name);
 
-        $this->repository->update(['logo' => $name], $bank->id);
+            if($bank->created_at == $bank->updated_at) {
+                $this->repository->update(['logo' => $name], $bank->id);
+            }
+        }
     }
 }
