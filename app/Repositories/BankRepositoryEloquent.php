@@ -3,6 +3,7 @@
 namespace financeiro\Repositories;
 
 use financeiro\Events\BankStoredEvent;
+use Illuminate\Http\UploadedFile;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use financeiro\Models\Bank;
@@ -37,7 +38,7 @@ class BankRepositoryEloquent extends BaseRepository implements BankRepository
     public function update(array $attributes, $id)
     {
         $logo = null;
-        if(isset($attributes['logo'])) {
+        if(isset($attributes['logo']) && $attributes['logo'] instanceof UploadedFile) {
             $logo = $attributes['logo'];
             unset($attributes['logo']);
         }
