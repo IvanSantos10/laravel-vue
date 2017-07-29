@@ -32,10 +32,17 @@ $factory->state(User::class, 'admin', function (Faker\Generator $faker){
     ];
 });
 
-$factory->define(Bank::class, function (Faker\Generator $faker) {
+/*$factory->define(Bank::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'logo' => md5(time()). '.jpeg',
     ];
-});
+});*/
 
+$factory->define(BankAccount::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->city,
+        'agency' => rand(10000, 60000).'-'.rand(0,9),
+        'account' => rand(70000, 260000).'-'.rand(0,9)
+    ];
+});
