@@ -4,11 +4,6 @@ namespace financeiro\Http\Controllers\Api;
 
 use financeiro\Http\Controllers\Controller;
 use financeiro\Http\Controllers\Response;
-use Illuminate\Http\Request;
-
-use financeiro\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
 use financeiro\Http\Requests\BankAccountCreateRequest;
 use financeiro\Http\Requests\BankAccountUpdateRequest;
 use financeiro\Repositories\BankAccountRepository;
@@ -35,17 +30,9 @@ class BankAccountsController extends Controller
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $bankAccounts = $this->repository->all();
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $bankAccounts,
-            ]);
-        }
-
-        return view('bankAccounts.index', compact('bankAccounts'));
+        return $bankAccounts;
     }
 
     /**
@@ -57,34 +44,9 @@ class BankAccountsController extends Controller
      */
     public function store(BankAccountCreateRequest $request)
     {
+        $bankAccount = $this->repository->create($request->all());
 
-        try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            $bankAccount = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'BankAccount created.',
-                'data'    => $bankAccount->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return response()->json($bankAccount->toArray(), 201);
     }
 
 
@@ -99,14 +61,7 @@ class BankAccountsController extends Controller
     {
         $bankAccount = $this->repository->find($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $bankAccount,
-            ]);
-        }
-
-        return view('bankAccounts.show', compact('bankAccount'));
+        return response()->json($bankAccount->toArray());
     }
 
 
@@ -130,42 +85,15 @@ class BankAccountsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  BankAccountUpdateRequest $request
-     * @param  string            $id
+     * @param  string $id
      *
      * @return Response
      */
     public function update(BankAccountUpdateRequest $request, $id)
     {
+        $bankAccount = $this->repository->update($request->all(), $id);
 
-        try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            $bankAccount = $this->repository->update($request->all(), $id);
-
-            $response = [
-                'message' => 'BankAccount updated.',
-                'data'    => $bankAccount->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return response()->json($bankAccount->toArray());
     }
 
 
@@ -178,16 +106,8 @@ class BankAccountsController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        $this->repository->delete($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'BankAccount deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
-
-        return redirect()->back()->with('message', 'BankAccount deleted.');
+        return response()->json([], 204);
     }
 }
