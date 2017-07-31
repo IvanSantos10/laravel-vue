@@ -2,6 +2,7 @@
 
 namespace financeiro\Repositories;
 
+use financeiro\Presenters\BankAccountPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use financeiro\Models\BankAccount;
@@ -22,13 +23,16 @@ class BankAccountRepositoryEloquent extends BaseRepository implements BankAccoun
         return BankAccount::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return BankAccountPresenter::class;
     }
 }
