@@ -47,18 +47,9 @@
         data() {
             return {
                 menus: [
-                    {name: 'Contas a pagar', dropdownId: 'teste'},
-                    {name: 'Contas a receber', dropdownId: 'auth.login'}
+                    {name: 'Contas bancária', dropdownId: 'bank-account.list'},
                 ],
-                menusDropdown: [
-                    {
-                        id: 'teste',
-                        items: [
-                            {id: 0, name: 'Listar contas', routeName: 'auth.login'},
-                            {id: 1, name: 'Criar contas', routeName: 'auth.login'}
-                        ]
-                    }
-                ],
+                menusDropdown: [],
                 user: Auth.user
             };
         },
