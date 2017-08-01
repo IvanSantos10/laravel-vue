@@ -6,30 +6,31 @@
                     <h5>Minhas contas bancárias</h5>
                 </span>
             </div>
-            <table class="bordered striped highlight responsive-table z-depth-5">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Agência</th>
-                    <th>C/C</th>
-                    <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(index, o) in bankAccounts">
-                    <td>&nbsp;{{ index + 1 }}</td>
-                    <td>{{o.name}}</td>
-                    <td>{{o.agency}}</td>
-                    <td>{{o.account}}</td>
-                    <td>
-                        <a v-link="{ name: 'bank-account.update', params: {id: o.id} }">Editar</a> |
+            <div class="card-panel z-depth-5">
+                <table class="bordered striped highlight responsive-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Agência</th>
+                        <th>C/C</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(index, o) in bankAccounts">
+                        <td>&nbsp;{{ index + 1 }}</td>
+                        <td>{{o.name}}</td>
+                        <td>{{o.agency}}</td>
+                        <td>{{o.account}}</td>
+                        <td>
+                            <a v-link="{ name: 'bank-account.update', params: {id: o.id} }">Editar</a> |
                         <a href="#" @click.prevent="openModalDelete(0)">Excluir</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="fixed-action-btn">
                 <a href="http:google.com" class="btn-floating btn-large">
                     <i class="large material-icons">add</i>
