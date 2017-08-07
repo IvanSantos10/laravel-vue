@@ -2,6 +2,7 @@
 
 namespace financeiro\Http\Controllers\Api;
 
+use financeiro\Criteria\FindByNameCriteria;
 use financeiro\Http\Controllers\Controller;
 use financeiro\Http\Controllers\Response;
 use financeiro\Http\Requests\BankAccountCreateRequest;
@@ -30,6 +31,7 @@ class BankAccountsController extends Controller
      */
     public function index()
     {
+        $this->repository->pushCriteria(new FindByNameCriteria('Jerrold Hagenes'));
         $bankAccounts = $this->repository->paginate();
 
         return $bankAccounts;
