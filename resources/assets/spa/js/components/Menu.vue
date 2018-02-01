@@ -19,7 +19,7 @@
                     </a>
                     <ul class="right hide-on-med-and-down">
                         <li v-for="o in menus">
-                            <a v-if="o.dropdownId" class="dropdown-button" href="!#" :data-activates="o.dropdownId">
+                            <a v-if="o.routeName" class="dropdown-button" href="!#" :data-activates="o.routeName">
                                 {{ o.name }} <i class="material-icons right">arrow_drop_down</i>
                             </a>
                             <a v-else v-link="{name: o.url}">{{ o.name }}</a>
@@ -47,7 +47,7 @@
         data() {
             return {
                 menus: [
-                    {name: 'Contas bancária', dropdownId: 'bank-account.list'},
+                    {name: 'Contas bancária', routeName: 'bank-accounts'},
                 ],
                 menusDropdown: [],
                 user: Auth.user
@@ -61,6 +61,6 @@
         ready() {
             $('.button-collapse').sideNav();
             $('.dropdown-button').dropdown();
-        },
+        }
     };
 </script>

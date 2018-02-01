@@ -25,12 +25,14 @@
                         <td>{{o.account}}</td>
                         <td>
                             <a v-link="{ name: 'bank-account.update', params: {id: o.id} }">Editar</a> |
-                        <a href="#" @click.prevent="openModalDelete(0)">Excluir</a>
+                            <a href="#" @click.prevent="openModalDelete(0)">Excluir</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <pagination :current-page.sync="pagination.current_page" :per-page="pagination.per_page" :total-records="pagination.total"></pagination>
+                <pagination :current-page.sync="pagination.current_page"
+                            :per-page="pagination.per_page"
+                            :total-records="pagination.total"></pagination>
             </div>
             <div class="fixed-action-btn">
                 <a href="http:google.com" class="btn-floating btn-large">
@@ -51,7 +53,7 @@
         </div>
         <div slot="footer">
             <button class="btn btn-flat waves-effect green lighten-2 model-close model-action"
-                @click="destroy()">Ok
+                    @click="destroy()">Ok
             </button>
             <button class="btn btn-flat waves-effect waves-red model-close model-action">Cancelar</button>
         </div>
@@ -68,7 +70,7 @@
             'modal': ModalComponent,
             'pagination': PaginationComponent,
         },
-        data(){
+        data() {
             return {
                 bankAccounts: [],
                 bankAccountToDelete: null,
@@ -93,23 +95,23 @@
                     Materialize.toast('Conta bancária excluída com sucesso!', 4000);
                 });
             },
-            openModalDelete(bankAccount){
+            openModalDelete(bankAccount) {
                 this.bankAccountToDelete = bankAccount;
                 $('#modal-delete').modal('open');
             },
-            getBankAccounts(){
+            getBankAccounts() {
                 BankAccount.query({
-                    page: this.pagination.current_page + 1,
+                    page: this.pagination.current_page + 1
                 }).then((response) => {
                     this.bankAccounts = response.data.data;
                     let pagination = response.data.meta.pagination;
-                    pagination.current_page --;
+                    pagination.current_page--;
                     this.pagination = pagination;
                 });
             }
         },
         events: {
-            'pagination::changed'(page){
+            'pagination::changed'(page) {
                 this.getBankAccounts()
             }
         }

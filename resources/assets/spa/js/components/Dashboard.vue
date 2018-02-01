@@ -22,6 +22,7 @@
             User.get().then((response) => {
                 console.log(response.data);
             });
+
             //console.log(Auth.user());
         }
     }
